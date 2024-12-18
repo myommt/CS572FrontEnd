@@ -1,10 +1,8 @@
 import { ApplicationConfig, inject, InjectionToken, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter, Routes, withComponentInputBinding } from '@angular/router';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { StateService } from './state.service';
-import { addTokenInterceptor } from './add-token.interceptor';
-import { SigninComponent } from './users/signin.component';
 
 export const apiUrl = new InjectionToken<string>('common url for all');
 
@@ -18,11 +16,7 @@ function initialize() {
 
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'signin', pathMatch: 'full' },
-  { path: 'signin', loadComponent: () => import('./users/signin.component').then(c => c.SigninComponent) },
-  { path: 'signup', loadComponent: () => import('./users/signup.component').then(c => c.SignupComponent) },
-  { path: 'changepassword', loadComponent: () => import('./users/userprofile.component').then(c => c.UserprofileComponent) },
-  //{ path: '', redirectTo: '/expenses', pathMatch: 'full' },
+  { path: '', redirectTo: '/expenses', pathMatch: 'full' },
   { path: 'summary', loadComponent: () => import("./summary.component").then(c => c.SummaryComponent) },
   {
     path: 'expenses',
@@ -40,8 +34,8 @@ const appRoutes: Routes = [
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true })
-    , { provide: apiUrl, useValue: 'http://localhost:3000' }
-    , provideHttpClient(withInterceptors([addTokenInterceptor]))
+    , { provide: apiUrl, useValue: 'https://cs572backend.onrender.com' }
+    , provideHttpClient()
     , provideAppInitializer(initialize)
     , provideRouter(appRoutes, withComponentInputBinding())
     , provideAnimationsAsync(), provideAnimationsAsync()

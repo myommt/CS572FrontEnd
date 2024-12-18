@@ -14,51 +14,56 @@ interface DateOption {
   standalone: true,
   imports: [ExpenseChartComponent, ExpensePieComponent, OpenaiComponent, ReactiveFormsModule],
   template: `
-    <h1>Expense Summary of <select [formControl]="dateControl" (change)="onDateChange()" class="date-dropdown">
-      @for(option of dateOptions(); track option.value) {
-        <option [value]="option.value"> {{ option.display }} </option>
-      }
-    </select></h1>
+    <h1>Expense Summary of 
+      <select [formControl]="dateControl" (change)="onDateChange()" class="date-dropdown">
+        @for(option of dateOptions(); track option.value) {
+          <option [value]="option.value"> {{ option.display }} </option>
+        }
+      </select>
+    </h1>
     <div class="chart-container">
       <div class="chart-box">
         <app-expense-chart [selectedDate]="selectedDate()"></app-expense-chart>
       </div>
       <div class="chart-box">
-         <app-expense-pie [selectedDate]="selectedDate()"></app-expense-pie> 
+        <app-expense-pie [selectedDate]="selectedDate()"></app-expense-pie>
       </div>
     </div>
     <div>
-       <app-openai [selectedDate]="selectedDate()"></app-openai> 
+      <app-openai [selectedDate]="selectedDate()"></app-openai>
     </div>
   `,
   styles: [`
     .chart-container {
       display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: space-between; /* Adjust to space-between */
+      align-items: flex-start;
+      width: 100%; /* Ensure it doesn't overflow */
+      box-sizing: border-box;
     }
     .chart-box {
-      flex: 1;
-      max-width: 45%; 
+      flex: 1 1 calc(50% - 20px); /* Adjust to ensure each chart takes 50% minus margin */
+      max-width: 50%; /* Adjust to ensure it doesn't exceed 50% of container width */
       padding: 10px;
       margin: 10px;  
+      box-sizing: border-box;
     }
-
-    .date-dropdown { appearance: none; 
+    .date-dropdown { 
+      appearance: none; 
       background-color: #f9f9f9; 
       border: 1px solid #ccc; 
       border-radius: 4px;
-       padding: 8px 12px; 
-       font-size: 14px; 
-       font-family: Arial, sans-serif; 
-       color: #333;
-        cursor: pointer; 
-      } 
-      .date-dropdown option { 
-        background-color: #ffffff; 
-        color: #333; 
-      }
+      padding: 8px 12px; 
+      font-size: 14px; 
+      font-family: Arial, sans-serif; 
+      color: #333;
+      cursor: pointer; 
+    } 
+    .date-dropdown option { 
+      background-color: #ffffff; 
+      color: #333; 
+    }
   `]
 })
 export class SummaryComponent {

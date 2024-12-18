@@ -24,13 +24,13 @@ import { SummaryResponse } from './openai.type';
       }
         
       .summary-content {
-        background-color:rgb(215, 84, 84);
+        background-color:rgb(124, 187, 231);
         padding: 15px;
         border-radius: 5px;
         margin-bottom: 20px;
       }
       .loading-text {
-        font-size: 16px;
+        font-size: 30px;
         color: rgb(180, 236, 240);
       }
     `

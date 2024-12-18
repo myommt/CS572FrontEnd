@@ -1,15 +1,19 @@
 import { effect, Injectable, signal } from '@angular/core';
 
 export type GlobalState = {
+  fullname: string,
   email: string,
   _id: string,
-  jwt: string;
+  jwt: string,
+  picture_url: string;
 };
 
 export const initial_state = {
+  fullname: '',
   email: '',
   _id: '',
-  jwt: ''
+  jwt: '',
+  picture_url: ''
 };
 
 @Injectable({
@@ -23,8 +27,8 @@ export class StateService {
   });
 
   isLoggedIn() {
-    //return this.$state()._id ? true : false;
+    return this.$state()._id ? true : false;
 
-    return true;
+    //return true;
   }
 }
