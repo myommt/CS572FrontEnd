@@ -40,7 +40,7 @@ const appRoutes: Routes = [
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true })
-    , { provide: apiUrl, useValue: 'http://localhost:3000' }
+    , { provide: apiUrl, useValue: 'https://cs572backend.onrender.com' }
     , provideHttpClient(withInterceptors([addTokenInterceptor]))
     , provideAppInitializer(initialize)
     , provideRouter(appRoutes, withComponentInputBinding())
